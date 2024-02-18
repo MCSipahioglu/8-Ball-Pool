@@ -1,0 +1,33 @@
+
+Final output video link: https://www.youtube.com/watch?v=IVJHaa2JAsk
+
+(i, ii) Developed Code
+	Written in Python given in the folder: Code (Version 4)
+	Input video is also in the code folder: video.mp4
+	Intermediate results and testing codes: Read Report for usage, explanations and screenshots of results.
+!	Final result inside the code folder: video_processed.mp4
+!	The actual main code is divided into 3: 
+		0_frame_sampling: Takes video.mp4 samples and saves frames into subfolder "frames"
+		1_frame_analysis_V4: Only this frame_analysis code should be used. It takes "frames" and saves "frames_processed"
+		2_frames_to_video: Stitches back the processed frames into the video_processed.mp4.
+
+Note: 1_frame_analysis_V4.py code takes about 1-2 hours to execute. (Intel i7 + 16GB RAM)
+Note: variables.py holds all the tuned parameters for the code.
+Note: At the end of variables.py a v4_dbg_flag exists. This should be changed to 1 for a better debugging output for test_4 only.
+
+
+(iii) Report
+	File named Report.pdf
+	Designed to be read as pseudocode or read side to side with the original code.
+	All instructions on reading alongside codes are written inside the report.
+
+(iv) Slides
+	File named Presentation.pptx
+
+(v) Old Versions
+	Includes the code base for version 3 that implements obstruction rejection for detected balls.
+	This feature was depreciated when upgrading to version 4 (Not part of the final output)
+	   but as explained in the report it is a novel idea that shouldn't be scrapped.
+	Necessary information is given inside the Report for explanation and usage.
+
+
