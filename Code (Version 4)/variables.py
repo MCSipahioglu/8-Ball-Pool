@@ -90,4 +90,4 @@ matching_radius=matching_radius*gui_scale
 
 
 ########################    DEBUGGING VARIABLES    ########################
-v4_dbg_flag=1               # Turns on or off update notifications in update_master_balls. (Version 4 Only)
+v4_dbg_flag=0               # Turns on or off update notifications in update_master_balls. (Version 4 Only)

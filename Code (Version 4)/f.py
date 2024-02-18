@@ -416,6 +416,16 @@ def update_master_balls(master_balls,new_frame):
     new_img_reference=remove_tablecloth(new_img_table)                      # Remove the tablecloth, only the balls and other objects should be left.
     new_img_subtracted=new_img_reference
 
+
+    # IF MASTER CUE BALL DOESN'T HOLD THE CUE BALL FIND IT AGAIN!
+    #cue_ball_reclass=classify_ball_luminance(master_balls[0][5])
+    #if cue_ball_reclass!='C':   
+    #    master_balls[0][1]=-1   
+    ## WE ASSUME THAT CUE BALL IS ALWAYS CORRECTLY CLASSIFIED SO WE ONLY DOUBLE CHECK THE CUE BALL'S CLASSIFICATION NOT THE OTHERS
+    ## Version 5 Should have class correction with class history for the other balls as well. Be sure to migrate class histories correcctly when the same ball is assigned to other master balls.
+
+
+
     master_ball_matched_flags=[]                                            # Flag 0 if unmatched (needs to be matched), Flag 1 if matched, Flag -1 if ball not in game or not detected. (Doesn't need matching)
     for i, master_ball in enumerate(master_balls):                          # Initialize an array of matched_flags. The master balls in game should need matching.
         master_ball_state=master_ball[1]
@@ -425,7 +435,9 @@ def update_master_balls(master_balls,new_frame):
             master_ball_matched_flags.append(-1)
 
 
-    
+
+
+
         
 
     #TAKE EACH MASTER BALL THAT NEEDS MATCHING. FIND (MATCH IT TO A BALL ON THE TABLE) IT, UPDATE IT, REMOVE IT FROM FRAME. ANY BALLS STILL DETECTED AFTER THAT ARE NEW DETECTIONS, ADD THEM AS IS.
@@ -599,15 +611,16 @@ def update_master_balls(master_balls,new_frame):
     # Extremely specific correction for aesthetics: If a cue ball is hit very fast with the cue. And if the tip of the cue was mistakenly detected as a ball just as it hits the cue ball and the cue ball detection is interrupted. The mistakenly detected ball can be overwritten by the ghost of the cue ball. Basically this situation changes the class of a || master ball to C. Never supposed to happen.
     # If this explanation is complex don't worry about it. It basically makes sure that the classes of the Master Balls are always C, O*7, 8, ||*7 as they are never meant to be changed.
     # The program is robust enough that even without this section it can keep track of eerything correctly.
-    for i, ball in enumerate(master_balls):         # At indexes 1-7 and 9-15 it will hold the solid or striped balls' data in no particular order since we don't classify the balls by specific color or number.
+    for i in range(len(master_balls)):        # At indexes 1-7 and 9-15 it will hold the solid or striped balls' data in no particular order since we don't classify the balls by specific color or number.
         if i==0:                # Cue Ball
-            ball[0]='C'
+            master_balls[i][0]='C'
         elif 1 <= i <= 7:       # Solid Balls
-            ball[0]='O'
+            master_balls[i][0]='O'
         elif i==8:              # 8 Ball
-            ball[0]='8'
+            master_balls[i][0]='8'
         elif 9 <= i <= 15:      # Striped Balls
-            ball[0]='||'
+            master_balls[i][0]='||'
+
 
 
     return master_balls

@@ -34,16 +34,19 @@ console_time=1
 initial_ball_state=-1       # Not Yet Detected
 
 master_balls = [[-99] * 7 for _ in range(16)]     # Master balls will hold all ball data by tracking them. At 0 it will hold the cue ball data. From index 1-7 solid, index 8-> 8 ball, index 9-15 Striped Balls.
-for i, ball in enumerate(master_balls):         # At indexes 1-7 and 9-15 it will hold the solid or striped balls' data in no particular order since we don't classify the balls by specific color or number.
-    ball[1]=initial_ball_state
+for i in range(len(master_balls)):        # At indexes 1-7 and 9-15 it will hold the solid or striped balls' data in no particular order since we don't classify the balls by specific color or number.
+    
+    master_balls[i][1]=initial_ball_state
+    
     if i==0:                # Cue Ball
-        ball[0]='C'
+        master_balls[i][0]='C'
     elif 1 <= i <= 7:       # Solid Balls
-        ball[0]='O'
+        master_balls[i][0]='O'
     elif i==8:              # 8 Ball
-        ball[0]='8'
+        master_balls[i][0]='8'
     elif 9 <= i <= 15:      # Striped Balls
-        ball[0]='||'
+        master_balls[i][0]='||'
+
 
 
 start_frame=94
